@@ -27,14 +27,14 @@ To understand the contents of your Keycloak installation, see the [directory str
 
 ### 1. Start Keycloak
 ```sh
-bin/kc.sh --http-port=8100
+bin/kc.sh --http-port=8200
 ```
 DEV mode
 ```sh
-bin/kc.sh start-dev --http-port=8100
+bin/kc.sh start-dev --http-port=8200
 ```
 
-After the server boots, open http://localhost:8100 in your web browser. The welcome page will indicate that the server is running.
+After the server boots, open http://localhost:8200 in your web browser. The welcome page will indicate that the server is running.
 
 Docs [configuration guides](https://www.keycloak.org/guides#server).
 
@@ -107,9 +107,9 @@ Go through the setup steps to access the admin panel.
   - Go to **APIs & Services** > **Credentials**.
   - Select **Zoo Management**.
   - Add **Authorized JavaScript Origins**:
-    - `http://localhost:8100`
+    - `http://localhost:8200`
   - Add **Authorized Redirect URIs**:
-    - `http://localhost:8100/realms/zoo/broker/google/endpoint`
+    - `http://localhost:8200/realms/zoo/broker/google/endpoint`
   - Save changes.
 - In **Keycloak**:
   - **Alias**: `google`
