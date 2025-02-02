@@ -1,7 +1,5 @@
 # Keycloak
 
-===
-
 ## Core Concepts
 
 A realm secures and manages security metadata for a set of users, applications, and registered oauth clients. 
