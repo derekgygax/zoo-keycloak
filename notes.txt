@@ -1,0 +1,158 @@
+The core concept in Keycloak is a Realm. 
+A realm secures and manages security metadata for a set of users, applications, and registered oauth clients. 
+Users can be created within a specific realm within the Administration console. 
+Roles (permission types) can be defined at the realm level 
+and you can also set up user role mappings to assign these permissions to specific users.
+
+Definitions
+  -Realm: A zoo branch (e.g., "Central Zoo") that manages its own animals, staff, and visitors separately from other branches.
+  
+  -Role: A job title at the zoo (e.g., "Vet", "Cleaner", "Admin") that defines what someone can do.
+  
+  -User: A person at the zoo (e.g., John, the vet) who is assigned a role and given permissions.
+  
+  -Client: The zoo’s website or app (e.g., "zoo-management") that people use to log in. 
+    It doesn’t handle authentication itself but relies on Keycloak to 
+    verify users and check their roles before granting access.
+
+1. Start up the Keycloak dev server at port 8100 (DEV mode, NOT for production)
+  bin/kc.sh start-dev --http-port=8100
+
+2. Create a temporary Admin
+
+  go through steps to get to admin page
+
+2. Make real admin and erase old one (in master realm)
+  Click Users on left
+  Click Add User
+    Email verified: ON
+    username: admin
+    email:
+    first name:
+    last name:
+  Click Create
+  Click Credentials tab
+  Set password
+    temporary: OFF
+  Save and set password
+  Click Role Mappign tab
+  click Assign Role
+  In pop up click drop down in top left that says "Filter by clients"
+  Switch it to "Filter by Realm Roles"
+    admin: check on
+    create-realm: check on
+    OTHERS LEAVE AS IS
+  Click Assign
+
+  Log out of tempadmin
+  Login as admin
+  Click Users on left
+  Select 3 dots on right for tempadmin and Delete
+
+3. Create Realm zoo
+  Click drop down saying master on top left
+  Click Create Realm
+  Name the realm
+    zoo
+  Click create
+
+Ensure you are always in the zoo realm in that drop down
+
+4. Add the zoo-client
+  Click clients
+  Click "Create Client"
+    Client Type: OpenID Connect
+    Client ID: zoo-client
+    Name: Zoo Client
+    Description: 
+  Click Next
+    Client authentication: ON
+    Authorization: OFF
+    Standard Flow: CHECK
+    Direct Access: CHECK
+    All others: UNCHECK
+  Click Next
+    Root: http://localhost:3000
+    Home: http://localhost:3000
+    redirect: http://localhost:3000/api/auth/callback     ADD TO THIS LATER
+    logout redirect: http://localhost:3000/            ADD TO THIS LATER OR FIX UP
+    origins: http://localhost:3000         for CORS
+  Click Save
+
+5. Add Roles 
+  Click Realm Roles on the left
+  Click Create Role
+    Role Name: GUEST
+    Description: 
+  Click Save
+  Repeat for all roles
+    ADMIN
+    STAFF
+    VET
+    VENDOR
+    
+  
+6. Make Google an Identity Provider
+  Click Identity Provider on left bottom
+  Choose Google
+  Go to google cloud console for crispirzoo
+    In APIs & Services/Credentials
+    Click on Zoo Management
+      You already made this whole thing
+    Authorized JavaScript Origins needs
+      http://localhost:8100
+    Authorized redirect URIs needs
+      http://localhost:8100/realms/zoo/broker/google/endpoint
+    Click Save
+  Back in Keycloak
+    Alias: google
+    Client Id: from google, in .env of zoo
+    Client Secret: from google, in .env of zoo
+    Everything else leave as is
+  Click Add
+
+7. Make GUEST a default Role (will be given when account is created)
+  Click Identity Provider on left bottom
+  Click google
+  Choose tab Mapper
+  Click Add Mapper
+    Name: Default Role GUEST
+    Sync mode override: Import
+    Mapper Type: Harcode Role
+    Click Select Role
+      In the open window click the drop down in the top left and switch to Filter by Realm Role
+      Select GUEST
+      Click assign
+    Click Save
+
+8. Make google login create user
+  Click Identity Provider on left bottom
+  Click google
+  Settings tab scroll to bottom
+  Set the following
+  First login flow override: first broker login
+  Trust Email: ON
+  Click Save
+  ALSO
+  Click Realm Settings on left
+  Choose tab Login
+    User registration: ON
+    Login with email is on by default but maybe want to change?
+
+9. Get the client secret and put it in the .env for zoo
+  Click on Clients on left
+  Click on zoo-client
+  Scoll down and Ensure
+    Client Authentication: ON
+  Click Save
+  Credentials tab has showed up. Click it
+  Copy the client secret
+  Add it to the .evn in zoo 
+
+
+10. Assigning roles to User
+  Click Users on the left
+  Select the User
+  Click Assign Role
+  in the pop up on the top left click the drop down and click Filter by Realm Roles
+  Select the roles and click assign
