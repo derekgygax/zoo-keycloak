@@ -13,7 +13,6 @@ and you can also set up user role mappings to assign these permissions to specif
 - **Client**: The zoo’s website or app (e.g., "zoo-management") that people use to log in. It doesn’t handle authentication itself but relies on Keycloak to verify users and check their roles before granting access.
 
 
-To understand the contents of your Keycloak installation, see the [directory structure guide](https://www.keycloak.org/server/directory-structure).
 
 ---
 
@@ -21,6 +20,8 @@ To understand the contents of your Keycloak installation, see the [directory str
 Visit the official [Keycloak Downloads](https://www.keycloak.org/downloads) page.  
 For this setup, download:  
 - **Server** → **Keycloak (Quarkus Distribution)** → **ZIP Format**
+
+To understand the contents of your Keycloak installation, see the [directory structure guide](https://www.keycloak.org/server/directory-structure).
 
 ## Setup Instructions
 
