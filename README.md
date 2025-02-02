@@ -36,7 +36,7 @@ bin/kc.sh start-dev --http-port=8100
 
 After the server boots, open http://localhost:8100 in your web browser. The welcome page will indicate that the server is running.
 
-Docs configuration guide [configuration guides](https://www.keycloak.org/guides#server).
+Docs [configuration guides](https://www.keycloak.org/guides#server).
 
 ### 2. Create a Temporary Admin  
 Go through the setup steps to access the admin panel.
