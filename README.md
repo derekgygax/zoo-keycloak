@@ -1,34 +1,6 @@
-Keycloak
-========
+# Keycloak
 
-To understand the contents of your Keycloak installation, see the [directory structure guide](https://www.keycloak.org/server/directory-structure).
-
-To get help configuring Keycloak via the CLI, run:
-
-on Linux/Unix:
-
-    $ bin/kc.sh
-
-on Windows:
-
-    $ bin\kc.bat
-
-To try Keycloak out in development mode, run: 
-
-on Linux/Unix:
-
-    $ bin/kc.sh start-dev
-
-on Windows:
-
-    $ bin\kc.bat start-dev
-
-After the server boots, open http://localhost:8080 in your web browser. The welcome page will indicate that the server is running.
-
-To get started, check out the [configuration guides](https://www.keycloak.org/guides#server).
-
-
-# Keycloak Setup Guide
+---
 
 ## Core Concepts
 
@@ -41,6 +13,9 @@ and you can also set up user role mappings to assign these permissions to specif
 - **Role**: A job title at the zoo (e.g., "Vet", "Cleaner", "Admin") that defines what someone can do.
 - **User**: A person at the zoo (e.g., John, the vet) who is assigned a role and given permissions.
 - **Client**: The zoo’s website or app (e.g., "zoo-management") that people use to log in. It doesn’t handle authentication itself but relies on Keycloak to verify users and check their roles before granting access.
+
+
+To understand the contents of your Keycloak installation, see the [directory structure guide](https://www.keycloak.org/server/directory-structure).
 
 ---
 
@@ -59,6 +34,10 @@ DEV mode
 ```sh
 bin/kc.sh start-dev --http-port=8100
 ```
+
+After the server boots, open http://localhost:8100 in your web browser. The welcome page will indicate that the server is running.
+
+To get started, check out the [configuration guides](https://www.keycloak.org/guides#server).
 
 ### 2. Create a Temporary Admin  
 Go through the setup steps to access the admin panel.
