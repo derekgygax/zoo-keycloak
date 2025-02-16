@@ -15,8 +15,8 @@ Definitions
     It doesn’t handle authentication itself but relies on Keycloak to 
     verify users and check their roles before granting access.
 
-1. Start up the Keycloak dev server at port 8100 (DEV mode, NOT for production)
-  bin/kc.sh start-dev --http-port=8100
+1. Start up the Keycloak dev server at port 8200 (DEV mode, NOT for production)
+  bin/kc.sh start-dev --http-port=8200
 
 2. Create a temporary Admin
 
@@ -100,9 +100,9 @@ Ensure you are always in the zoo realm in that drop down
     Click on Zoo Management
       You already made this whole thing
     Authorized JavaScript Origins needs
-      http://localhost:8100
+      http://localhost:8200
     Authorized redirect URIs needs
-      http://localhost:8100/realms/zoo/broker/google/endpoint
+      http://localhost:8200/realms/zoo/broker/google/endpoint
     Click Save
   Back in Keycloak
     Alias: google
